@@ -62,8 +62,6 @@ void ObservableWebPage::observe(const QString &target, const QString &options)
                             nextSibling: mutation.nextSibling,
                             oldValue: mutation.oldValue
                         }
-//                                          console.log(object);
-//                        console.log(JSON.stringify(object));
                         console.log('%1' + JSON.stringify(object));
                     })
                 });
