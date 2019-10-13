@@ -98,7 +98,7 @@ void Polar::onLoadFinshed(const bool ok)
             function nextStep() {
                 const loginForm = document.getElementById('loginForm');
                 if (loginForm) {
-                    console.log('Logging in');
+                    console.info('QtInfoMsg: Logging into Polar Flow');
                     const email = document.getElementById('email');
                     email.value = %1;
                     const pass = document.getElementById('password');
@@ -111,10 +111,10 @@ void Polar::onLoadFinshed(const bool ok)
                 const weight = document.getElementById('weight');
                 if (weight) {
                     if (weight.value == %3) {
-                        console.log(`Weight is already ${weight.value} (%3)`);
+                        console.info(`QtInfoMsg: Weight is already ${weight.value} (%3)`);
                         return false; // Time to exit the app.
                     }
-                    console.log(`Updating weight from ${weight.value} to %3`);
+                    console.info(`QtInfoMsg: Updating weight from ${weight.value} to %3`);
                     weight.value = %3;
                     document.getElementById('save-account-btn').click();
                 }
@@ -122,7 +122,7 @@ void Polar::onLoadFinshed(const bool ok)
             try {
                 nextStep();
             } catch(error) {
-               console.info(error.toString());
+               console.debug(error.toString());
                const result = { error: { name: error.name, message: error.message } };
                result;
             }

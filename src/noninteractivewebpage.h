@@ -15,6 +15,8 @@ protected:
                             const QStringList &acceptedMimeTypes) override;
     void javaScriptAlert(const QUrl &securityOrigin, const QString &msg) override;
     bool javaScriptConfirm(const QUrl &securityOrigin, const QString &msg) override;
+    void javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level, const QString &message,
+                                  int lineNumber, const QString &sourceID) override;
     bool javaScriptPrompt(const QUrl &securityOrigin, const QString &msg,
                           const QString &defaultValue, QString *result) override;
 

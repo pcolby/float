@@ -50,7 +50,7 @@ void ObservableWebPage::observe(const QString &target, const QString &options)
     const QString script = QStringLiteral(R"JS(
         try {
             if (typeof %1 === 'undefined') {
-                console.debug('Constructing mutation observer "%1"');
+                console.trace('Constructing mutation observer "%1"');
                 %1 = new MutationObserver(function (mutationList, observer) {
                     mutationList.forEach((mutation) => {
                         var object = {
@@ -62,14 +62,14 @@ void ObservableWebPage::observe(const QString &target, const QString &options)
                             nextSibling: mutation.nextSibling,
                             oldValue: mutation.oldValue
                         }
-                        console.log('%1' + JSON.stringify(object));
+                        console.debug('%1' + JSON.stringify(object));
                     })
                 });
             }
-            console.log('Observing ' + %2);
+            console.trace('Observing ' + %2);
             %1.observe(%2%3%4);
         } catch(error) {
-            console.info(error.toString());
+            console.debug(error.toString());
             const result = { error: { name: error.name, message: error.message } };
             result;
         }

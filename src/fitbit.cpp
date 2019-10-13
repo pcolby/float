@@ -137,13 +137,13 @@ void Fitbit::nextStep()
             function nextStep() {
                 const pageLoadingScreen = document.getElementById('pageLoadingScreen');
                 if ((pageLoadingScreen) && (pageLoadingScreen.classList.contains('loading'))) {
-                    console.log('Page still loading');
+                    console.trace('Page still loading');
                     return false;
                 }
 
                 const loginForm = document.getElementById('loginForm');
                 if (loginForm) {
-                    console.log('Logging in');
+                    console.info('QtInfoMsg: Logging into Fitbit');
                     const email = document.querySelector('#email-input input');
                     email.value = %1;
                     email.dispatchEvent(new CustomEvent('blur'));
@@ -156,22 +156,22 @@ void Fitbit::nextStep()
 
                 const weightListItem = document.querySelector('.weight-list-item');
                 if (weightListItem) {
-                    console.log('Reading weight item');
+                    console.trace('Reading weight item');
                     result = {
                         date: weightListItem.querySelector('.weight-list-item-date-text').innerText,
                         bodyFat: weightListItem.querySelector('.weight-list-item-stats .body-fat-text').innerText,
                         weight: weightListItem.querySelector('.weight-list-item-stats.body-weight').innerText,
                     }
-                    console.log(JSON.stringify(result));
+                    console.debug(JSON.stringify(result));
                     return result;
                 } else {
-                    console.log("Didn't find anything useful; will wait");
+                    console.trace("Didn't find anything useful; will wait");
                 }
             }
             try {
                 nextStep();
             } catch(error) {
-               console.info(error.toString());
+               console.debug(error.toString());
                const result = { error: { name: error.name, message: error.message } };
                result;
             }

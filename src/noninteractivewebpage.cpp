@@ -44,6 +44,18 @@ bool NonInteractiveWebPage::javaScriptConfirm(const QUrl &securityOrigin, const 
     return false; // We do not confirm whatever JavaScript confirm() call wants.
 }
 
+void NonInteractiveWebPage::javaScriptConsoleMessage(JavaScriptConsoleMessageLevel level,
+                                                 const QString &message, int lineNumber,
+                                                 const QString &sourceID)
+{
+    QWebEnginePage::javaScriptConsoleMessage(level, message, lineNumber, sourceID);
+    // A small hack to allow info messages to be logged, since Chromium's API doesn't allow Qt to
+    // differentiate between debug and info messages in JavaScript (both are 'Info' level).
+    if (message.startsWith(QStringLiteral("QtInfoMsg:"))) {
+        qInfo().noquote() << message.mid(10).trimmed();
+    }
+}
+
 bool NonInteractiveWebPage::javaScriptPrompt(const QUrl &securityOrigin, const QString &msg,
                       const QString &defaultValue, QString *result)
 {
