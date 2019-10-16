@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
     // Parse the command line options.
     QCommandLineParser parser;
-    parser.setApplicationDescription(QStringLiteral("Get Office 365 tenant admin consent"));
+    parser.setApplicationDescription(QStringLiteral("Export weight from Fitbit to Polar Flow"));
     parser.addHelpOption();
     parser.addOptions({
         {{QStringLiteral("c"), QStringLiteral("credentials")},
